@@ -1,0 +1,55 @@
+# Default values for my-jenkins.
+# This is a basic example, feel free to modify according to your needs.
+
+replicaCount: 1
+
+image:
+  repository: jenkins/jenkins
+  pullPolicy: IfNotPresent
+  tag: "lts"
+
+service:
+  type: ClusterIP
+  port: 8080
+  targetPort: 8080
+  nodePort: null
+  externalPort: 8080
+
+ingress:
+  enabled: false
+  name: ""
+  annotations: {}
+  hosts:
+    - host: jenkins.local
+      paths: ["/"]
+  tls: []
+  pathType: Prefix
+
+persistence:
+  enabled: true
+  storageClass: "-"
+  accessMode: ReadWriteOnce
+  size: 8Gi
+
+resources:
+  limits:
+    memory: 1Gi
+    cpu: 500m
+  requests:
+    memory: 512Mi
+    cpu: 250m
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+jenkins:
+  master:
+    baseImage: "jenkins/jenkins:lts"
+    image: "jenkins/jenkins"
+    tag: "lts"
+    adminPassword: ""
+    adminUsername: admin
+    jenkinsUrl: http://jenkins.local:8080
