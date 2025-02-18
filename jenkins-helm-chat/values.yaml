@@ -1,4 +1,4 @@
 replicaCount: 1
 myservice:
-   type: NodePort
+   type: LoadBalancer
    port: 30000
