@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "my-jenkins.fullname" . }}
+  labels:
+    app: {{ include "my-jenkins.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: {{ include "my-jenkins.fullname" . }}
+  type: {{ .Values.service.type }}
