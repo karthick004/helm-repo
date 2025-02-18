@@ -1,11 +1,11 @@
 spec:
   volumeClaimTemplates:
     - metadata:
-        name: jenkins
+        name: jenkins-home  # This is the name of the volume, use this in volumeMounts.
       spec:
         accessModes:
-          - ReadWriteOnce
+          - ReadWriteOnce  # This means the volume can be mounted as read-write by only a single node.
         resources:
           requests:
-            storage: 8Gi
-        storageClassName: standard  # Ensure this is set correctly
+            storage: 8Gi  # The requested storage size for the volume.
+        storageClassName: standard  # Ensure this matches the storage class in your cluster
